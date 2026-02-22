@@ -1,0 +1,11 @@
+{
+  "name": "claude-browser",
+  "version": "1.0.0",
+  "description": "Inspiration widget project for GitHub Pages deployment.",
+  "scripts": {
+    "deploy": "gh-pages -d ."
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
+  }
+}
