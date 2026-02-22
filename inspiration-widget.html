@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration Generator</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        #inspiration-widget {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 32px 20px 28px 20px;
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(80, 120, 200, 0.13);
+            background: #fff;
+            text-align: center;
+            transition: box-shadow 0.2s;
+        }
+        #inspiration-widget:hover {
+            box-shadow: 0 8px 32px rgba(80, 120, 200, 0.18);
+        }
+        #message-display {
+            min-height: 48px;
+            margin-bottom: 24px;
+            font-size: 1.22em;
+            color: #2d3a4a;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            line-height: 1.4;
+        }
+        #inspire-btn {
+            padding: 12px 32px;
+            font-size: 1.08em;
+            border-radius: 6px;
+            border: none;
+            background: linear-gradient(90deg, #4f8cff 0%, #6fc3ff 100%);
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+            transition: background 0.2s, transform 0.1s;
+        }
+        #inspire-btn:hover, #inspire-btn:focus {
+            background: linear-gradient(90deg, #357ae8 0%, #4f8cff 100%);
+            transform: translateY(-2px) scale(1.03);
+            outline: none;
+        }
+        @media (max-width: 500px) {
+            #inspiration-widget {
+                max-width: 98vw;
+                padding: 18px 4vw 16px 4vw;
+            }
+            #message-display {
+                font-size: 1em;
+            }
+            #inspire-btn {
+                padding: 10px 10vw;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="inspiration-widget">
+        <div id="message-display" aria-live="polite">
+            <!-- Message will appear here -->
+        </div>
+        <button id="inspire-btn">Inspire Me</button>
+    </div>
+</body>
+<script>
+// Array of inspirational messages
+const inspirationMessages = [
+    "Believe you can and you're halfway there.",
+    "Every day is a fresh start.",
+    "Stay curious, keep learning!",
+    "Mistakes are proof that you are trying.",
+    "Take a deep breath and keep going.",
+    "You are capable of amazing things.",
+    "Progress, not perfection.",
+    "Small steps every day lead to big results.",
+    "Your only limit is your mind.",
+    "Success is the sum of small efforts repeated."
+];
+
+// Display a default message when the widget loads and prevent repeat messages
+let lastMessageIndex = null;
+window.addEventListener('DOMContentLoaded', () => {
+    const messageDisplay = document.getElementById('message-display');
+    if (messageDisplay) {
+        messageDisplay.textContent = 'Click "Inspire Me" for a boost!';
+    }
+
+    // Add click event handler to the Inspire Me button
+    const inspireBtn = document.getElementById('inspire-btn');
+    if (inspireBtn) {
+        inspireBtn.addEventListener('click', () => {
+            if (inspirationMessages.length === 0) {
+                messageDisplay.textContent = 'No inspiration available.';
+                return;
+            }
+            let randomIndex;
+            if (inspirationMessages.length === 1) {
+                randomIndex = 0;
+            } else {
+                do {
+                    randomIndex = Math.floor(Math.random() * inspirationMessages.length);
+                } while (randomIndex === lastMessageIndex);
+            }
+            lastMessageIndex = randomIndex;
+            messageDisplay.textContent = inspirationMessages[randomIndex];
+        });
+    }
+});
+</script>
+</body>
+</html>
